@@ -47,6 +47,9 @@ Entities:
 
            
 JoinTables & Relationships Between Tables:
-      1.  One to Many: musician to instrument (Each musician might play multiple instruments)
-      2.  One to Many:  gig_status to instrument (Each gig_status request might have multiple requested instruments)
-      3.  Many to Many :  gig to instrument -- Each instrument can be requested multiple times for a gig (record in gig_status). A gig might request multiple musicians to play the same instruments (gig_status)   A gig might request multiple musicians to play the same instruments (gig_status) multiple version of the same instrument.
+1.  One to Many: musician to instrument (Each musician might play multiple instruments)
+2.  One to Many:  gig_status to instrument (Each gig_status request might have multiple requested instruments)
+3.  Many to Many :  gig to instrument -- Each instrument can be requested multiple times for a gig (record in gig_status). 
+
+
+NOTES:  A gig might request multiple musicians to play the same instruments (gig_status)   A gig might request multiple musicians to play the same instruments (gig_status) multiple version of the same instrument.
