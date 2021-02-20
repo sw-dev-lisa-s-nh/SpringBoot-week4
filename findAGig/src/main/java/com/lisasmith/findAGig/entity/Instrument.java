@@ -2,8 +2,8 @@ package com.lisasmith.findAGig.entity;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -43,7 +43,7 @@ public class Instrument {
 		this.name = name;
 	}
 	
-	@ManyToMany(cascade=CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "musician_instrument",
 			joinColumns = @JoinColumn(name = "instrumentId", referencedColumnName = "instrumentId"),
 			inverseJoinColumns = @JoinColumn(name="userId", referencedColumnName = "id"))
@@ -54,7 +54,7 @@ public class Instrument {
 	public void setMusicians(List<User> musicians) {
 		this.musicians = musicians;
 	}
-	@ManyToMany(cascade = CascadeType.REFRESH)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "gigStatus_instrument",
 			joinColumns = @JoinColumn(name = "instrumentId", referencedColumnName = "instrumentId"),
 			inverseJoinColumns = @JoinColumn(name = "gigStatusId", referencedColumnName = "id"))

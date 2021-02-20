@@ -6,4 +6,5 @@ import com.lisasmith.findAGig.entity.Instrument;
 
 public interface InstrumentRepository extends CrudRepository<Instrument,Long>{
 
+	public Instrument findByName(String name);
 }

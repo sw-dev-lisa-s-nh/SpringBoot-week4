@@ -2,28 +2,31 @@ package com.lisasmith.findAGig.entity;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.lisasmith.findAGig.util.UserType;
 
 @Entity
 public class User {
 
-	private Long id;
+	private Long id;		
+	private String username;
+	private String hash;
 	private String firstName;
 	private String lastName;
-	private Address address;
 	private UserType userType; 
 	private List<Instrument> instruments;
 	private boolean systemAdmin;	
-
+	private Address address;
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	public Long getId() {
@@ -34,6 +37,25 @@ public class User {
 		this.id = id;
 	}
 	
+	@Column(unique=true)
+	public String getUsername() {
+		return username;
+	}
+
+	@Column(unique=true)
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	@JsonIgnore
+	public String getHash() {
+		return hash;
+	}
+
+	public void setHash(String hash) {
+		this.hash = hash;
+	}
+
 	public String getFirstName() {
 		return firstName;
 	}
@@ -50,7 +72,7 @@ public class User {
 		this.lastName = lastName;
 	}
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "addressId")
 	public Address getAddress() {
 		return address;
@@ -76,7 +98,6 @@ public class User {
 		this.systemAdmin = systemAdmin;
 	}
 	
-	
 	@ManyToMany(mappedBy="musicians")
 	public List<Instrument> getInstruments() {
 		return instruments;
@@ -85,5 +106,4 @@ public class User {
 	public void setInstruments(List<Instrument> instruments) {
 		this.instruments = instruments;
 	}
-
 }

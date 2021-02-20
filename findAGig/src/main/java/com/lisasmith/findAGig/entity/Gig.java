@@ -1,12 +1,11 @@
 package com.lisasmith.findAGig.entity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 import com.lisasmith.findAGig.util.EventType;
 import com.lisasmith.findAGig.util.GenreType;
@@ -18,16 +17,13 @@ public class Gig {
 	private String gigDate;
 	private String gigStartTime;
 	private String gigDuration;
-	private Address address;
 	private String phone;
 	private EventType event;
 	private GenreType genre;
 	private String description;
 	private double salary;
 	private Long plannerId;
-	
-	//private Set<Instrument> instruments; 
-
+	private Address address;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -63,7 +59,7 @@ public class Gig {
 		this.gigDuration = gigDuration;
 	}
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "addressId")
 	public Address getAddress() {
 		return address;
@@ -105,15 +101,6 @@ public class Gig {
 		this.description = description;
 	}
 
-	// @ManyToMany(mappedBy = "gigs")
-//	public Set<Instrument> getInstruments() {
-//		return instruments;
-//	}
-//
-//	public void setInstruments(Set<Instrument> instruments) {
-//		this.instruments = instruments;
-//	}
-	
 	public Long getPlannerId() {
 		return plannerId;
 	}

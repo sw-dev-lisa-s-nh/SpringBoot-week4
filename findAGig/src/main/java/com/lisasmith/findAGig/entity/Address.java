@@ -1,10 +1,12 @@
 package com.lisasmith.findAGig.entity;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -18,10 +20,10 @@ public class Address {
 	private String zip;
 	
 	@JsonIgnore
-	private User user;
+	private Set<User> users;
 	
 	@JsonIgnore
-	private Gig gig;
+	private Set<Gig> gigs;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -65,23 +67,23 @@ public class Address {
 		this.zip = zip;
 	}
 	
-	@OneToOne(mappedBy = "address")
-	public User getUser() {
-		return user;
+	@OneToMany(mappedBy="address")
+	public Set<User> getUsers() {
+		return users;
 	}
 	
-	public void setUser(User user) {
-		this.user = user;
+	public void setUsers(Set<User> users) {
+		this.users = users;
 	}
 
 
-	@OneToOne(mappedBy = "address")
-	public Gig getGig() {
-		return gig;
+	@OneToMany(mappedBy = "address")
+	public Set<Gig> getGigs() {
+		return gigs;
 	}
 	
-	public void setGig(Gig gig) {
-		this.gig = gig;
+	public void setGigs(Set<Gig> gigs) {
+		this.gigs = gigs;
 	}
 
 }
